@@ -1,0 +1,1315 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API de Gestión de Clientes y Citas",
+      "version": "1.0.0",
+      "description": "API para gestionar clientes, citas y empleados."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3001",
+        "description": "Backend"
+      }
+    ],
+    "components": {
+      "schemas": {
+      "UserInput": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+   },
+    "paths": {
+      "/login": {
+        "post": {
+          "summary": "Metodo para acceder",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Acceso exitoso"
+            },
+            "400": {
+              "description": "Acceso incorrecto"
+            }
+          }
+        }
+      },
+      "/registrar": {
+        "post": {
+          "summary": "Crear un usuario",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Usuario creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+
+      "/api/clientes": {
+        "get": {
+          "summary": "Obtener la lista de clientes",
+          "responses": {
+            "200": {
+              "description": "Lista de clientes",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Cliente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear un cliente",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cliente creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/clientes/{id_cliente}": {
+        "get": {
+          "summary": "Obtener un cliente por su ID",
+          "parameters": [
+            {
+              "name": "id_cliente",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Cliente encontrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Cliente no encontrado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar un cliente por su ID",
+          "parameters": [
+            {
+              "name": "id_cliente",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cliente actualizado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "Cliente no encontrado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar un cliente por su ID",
+          "parameters": [
+            {
+              "name": "id_cliente",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Cliente eliminado exitosamente"
+            },
+            "404": {
+              "description": "Cliente no encontrado"
+            }
+          }
+        }
+      },
+      "/api/citas": {
+        "get": {
+          "summary": "Obtener la lista de citas",
+          "responses": {
+            "200": {
+              "description": "Lista de citas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CitaInput"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear una cita",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CitaInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Cita creada exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/citas/{id_cita}": {
+        "get": {
+          "summary": "Obtener una cita por su ID",
+          "parameters": [
+            {
+              "name": "id_cita",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Cita encontrada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CitaInput"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Cita no encontrada"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar un cita por su ID",
+          "parameters": [
+            {
+              "name": "id_cita",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cita actualizada exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "Cita no encontrada"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar una cita por su ID",
+          "parameters": [
+            {
+              "name": "id_cita",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Cita eliminada exitosamente"
+            },
+            "404": {
+              "description": "Cita no encontrada"
+            }
+          }
+        }
+      },
+      "/api/empleados": {
+        "get": {
+          "summary": "Listar empleados",
+          "responses": {
+            "200": {
+              "description": "Lista de empleados",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EmpleadoInput"
+                    }
+                                                                                                           }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear un empleado",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpleadoInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Empleado creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/empleados/{id_empleado}": {
+        "get": {
+          "summary": "Obtener un empleado por su ID",
+          "parameters": [
+            {
+              "name": "id_empleado",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Empleado encontrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmpleadoInput"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Empleado no encontrado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar un empleado por su ID",
+          "parameters": [
+            {
+              "name": "id_empleado",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpleadoInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Empleado actualizado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "Empleado no encontrado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar un empleado por su ID",
+          "parameters": [
+            {
+              "name": "id_empleado",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Empleado eliminado exitosamente"
+            },
+            "404": {
+              "description": "Empleado no encontrado"
+            }
+          }
+        }
+      },
+      "/api/metodos_pago": {
+        "get": {
+          "summary": "Listar metodos pago",
+          "responses": {
+            "200": {
+              "description": "Lista de metodos de pago",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetodoPagoInput"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear un metodo de pago",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetodoPagoInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Metodo de pago creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/metodos_pago/{id_metodo_pago}": {
+        "get": {
+          "summary": "Obtener un metodo de pago por su ID",
+          "parameters": [
+            {
+              "name": "id_metodo_pago",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Metodo pago encontrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/MetodoPagoInput"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Metodo pago no encontrado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar un metodo de pago por su ID",
+          "parameters": [
+            {
+              "name": "id_metodo_pago",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetodoPagoInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Metodo de pago actualizado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "Metodo de pago no encontrado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar un metodo de pago por su ID",
+          "parameters": [
+            {
+              "name": "id_metodo_pago",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Metodo de pago eliminado exitosamente"
+            },
+            "404": {
+              "description": "Metodo de pago no encontrado"
+            }
+            
+          }
+        }
+      },
+      "/api/servicios": {
+        "get": {
+          "summary": "Listar servicios ",
+          "responses": {
+            "200": {
+              "description": "Lista de servicio",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/servicioInput"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear un servico",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/servicioInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "servicio creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/servicios/{id_servicio}": {
+        "get": {
+          "summary": "Obtener un servicio por su ID",
+          "parameters": [
+            {
+              "name": "id_servicio",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "servicio encontrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/servicioInput"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "servicio no encontrado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar un servicio por su ID",
+          "parameters": [
+            {
+              "name": "id_servicio",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/servicioInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "servicio actualizado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "servicio no encontrado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar un servicio por su ID",
+          "parameters": [
+            {
+              "name": "id_servicio",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "servicio eliminado exitosamente"
+            },
+            "404": {
+              "description": "servicio no encontrado"
+            }
+            
+          }
+        }
+      },
+      "/api/tipos_servicio": {
+        "get": {
+          "summary": "Listar tipo servicio ",
+          "responses": {
+            "200": {
+              "description": "Lista de tipo servicio",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TipoServicioInput"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear un tipo servicio",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoServicioInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Tipo servicio creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/tipos_servicio/{id}": {
+        "get": {
+          "summary": "Obtener un tipo servicio por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Tipo servicio encontrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TipoServicioInput"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Tipo servicio no encontrado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar un tipo servicio por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoServicioInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Tipo servicio actualizado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "Tipo servicio no encontrado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar un tipo servicio por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Tipo servicio eliminado exitosamente"
+            },
+            "404": {
+              "description": "Tipo servicio no encontrado"
+            }
+            
+          }
+        } 
+      },
+      "/api/servicio_por_cita": {
+        "get": {
+          "summary": "Listar servicio por cita ",
+          "responses": {
+            "200": {
+              "description": "Lista de servicio por cita",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ServicioPorCitaInput"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear un servicio por cita",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicioPorCitaInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "servicio por cita creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/servicio_por_cita/{id}": {
+        "get": {
+          "summary": "Obtener un servicio por cita por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "servicio por cita encontrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas//ServicioPorCitaInput"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "servicio por cita no encontrado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar un servicio por cita por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicioPorCitaInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "servicio por cita  actualizado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "servicio por cita  no encontrado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar un servicio por cita por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "servicio por cita  eliminado exitosamente"
+            },
+            "404": {
+              "description": "servicio por cita  no encontrado"
+            }
+            
+          }
+        }
+      },
+      "/api/disponibilidad_empleado": {
+        "get": {
+          "summary": "Listar disponibilidad empleado ",
+          "responses": {
+            "200": {
+              "description": "Lista de disponibilidad empleado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/DisponibilidadEmpleadoInput"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear disponibilidad empleado",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisponibilidadEmpleadoInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "disponibilidad empleado creado exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/disponibilidad_empleado/{id}": {
+          "get": {
+            "summary": "Obtener disponibilidad empleado por su ID",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "disponibilidad empleado encontrado",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas//DisponibilidadEmpleadoInput"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "disponibilidad empleado no encontrado"
+              }
+            }
+          },
+          "put": {
+            "summary": "Actualizar disponibilidad empleado por su ID",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/DisponibilidadEmpleadoInput"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "disponibilidad empleado actualizado exitosamente"
+              },
+              "400": {
+                "description": "Solicitud incorrecta"
+              },
+              "404": {
+                "description": "disponibilidad empleado no encontrado"
+              }
+            }
+          },
+          "delete": {
+            "summary": "Eliminardisponibilidad empleado por su ID",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            ],
+            "responses": {
+              "204": {
+                "description": "disponibilidad empleado eliminado exitosamente"
+              },
+              "404": {
+                "description": "disponibilidad empleado no encontrado"
+              }
+      
+    },
+    "components": {
+      "schemas": {
+        "DisponibilidadEmpleado": {
+          "type": "object",
+          "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "id_empleado": {
+              "type": "string"
+            },
+            "dia_semana": {
+              "type": "string"
+            },
+            "mes": {
+              "type": "string"
+          },
+          "hora_inicio": {
+            "type": "string"
+        },
+        "hora_final": {
+          "type": "string"
+        },
+        "CitaInput": {
+          "type": "object",
+          "properties": {
+            "id_cliente": {
+              "type": "integer"
+            },
+            "id_empleado": {
+              "type": "integer"
+            },
+            "fecha_hora_cita": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "fecha_hora_servicio": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "estado": {
+              "type": "boolean"
+            },
+            "nota": {
+              "type": "string"
+            }
+          }
+        },
+        "EmpleadoInput": {
+          "type": "object",
+          "properties": {
+            "id_empleado": {
+              "type": "integer"
+            },
+            "nombre": {
+              "type": "string"
+            },
+            "apellido": {
+              "type": "string"
+            },
+            "num_telefonico": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+             "ocupacion": {
+                "type": "string"
+              }
+          }
+        },
+        "MetodoPagoInput": {
+          "type": "object",
+          "properties": {
+            "id_metodo_pago": {
+              "type": "integer"
+            },
+            "nombre": {
+              "type": "string"
+            }
+          }
+        },
+        "TipoServicioInput": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "nombre": {
+              "type": "string"
+            }
+          }
+        }
+    }
+  }
+  } 
+  }
+  }
+      },
+      "/api/factura": {
+        "get": {
+          "summary": "Listar factura",
+          "responses": {
+            "200": {
+              "description": "Lista factura",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FacturaInput"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear una factura",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "factura creada exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            }
+          }
+        }
+      },
+      "/api/factura/{id_factura}": {
+        "get": {
+          "summary": "Obtener una factura su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "factura encontrada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas//FacturaInput"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "factura no encontrada"
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar una factura por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "factura actualizada exitosamente"
+            },
+            "400": {
+              "description": "Solicitud incorrecta"
+            },
+            "404": {
+              "description": "factura no encontrada"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar una factura por su ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "factura eliminada exitosamente"
+            },
+            "404": {
+              "description": "factura  no encontrada"
+            }
+            
+          }
+        }
+      }
+    }
+}
