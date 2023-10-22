@@ -4,9 +4,13 @@ import MetodoPago from '../models/MetodoPago.js';
 
 export const guardarMetodoPago = async (req, res) => {
   try {
-    const { id_metodo_pago, nombre } = req.body;
-    const metodoPago = await MetodoPago.create({ id_metodo_pago, nombre });
-    res.json({ message: 'Metodo pago creado correctamente', metodoPagoId: metodoPago.id_metodo_pago });
+    if (req.isAuthenticated()) {
+      const { id_metodo_pago, nombre } = req.body;
+      const metodoPago = await MetodoPago.create({ id_metodo_pago, nombre });
+      res.json({ message: 'Metodo pago creado correctamente', metodoPagoId: metodoPago.id_metodo_pago });
+    } else {
+      res.redirect('/login');
+    }
   } catch (error) {
     console.error('Error al crear el metodo de pago:', error);
     res.status(500).json({ error: 'Hubo un error al crear el metodo de pago' });
