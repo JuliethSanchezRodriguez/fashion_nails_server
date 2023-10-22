@@ -1,4 +1,4 @@
-# fashion_nails_server
+# fashion nails server
 Parte backend del proyecto fashion nails para la materia practica profesional 2 
 ***
 ## Como correr el proyecto?
