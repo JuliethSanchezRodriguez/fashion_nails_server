@@ -29,4 +29,4 @@ const DisponibilidadEmpleado = sequelize.define('disponibilidad_empleado', {
   }
 });
 
-export default Empleado;
+export default DisponibilidadEmpleado;

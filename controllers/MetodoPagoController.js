@@ -46,8 +46,7 @@ export const eliminarMetodoPago = async (req, res) => {
 
 export const actualizarMetodoPago = async (req, res) => {
   const metodoPagoId = req.params.id;
-  const nuevosDatos = req.body; // Los nuevos datos se envían en el cuerpo de la solicitud
-
+  const nuevosDatos = req.body; 
   try {
     const metodoPago = await MetodoPago.findByPk(metodoPagoId);
     if (!metodoPago) {

@@ -16,12 +16,181 @@
       "UserInput": {
         "type": "object",
         "properties": {
-          "username": {
+          "usuario": {
             "type": "string"
           },
           "password": {
             "type": "string"
           }
+        }
+      },
+      "ClienteInput": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "fecha_nacimiento": {
+            "type": "string"
+          },
+          "num_telefonico": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+
+        }
+      },
+      "CitaInput": {
+        "type": "object",
+        "properties": {
+          "id_cita": {
+            "type": "string"
+          },
+          "id_cliente ": {
+            "type": "string"
+          },
+          "id_empleado ": {
+            "type": "string"
+          },
+          "fecha_hora_cita": {
+            "type": "string"
+
+          }, 
+          "fecha_hora_servicio": {
+            "type": "string"
+          }, 
+          "estado": {
+            "type": "string"
+          },
+          "nota": {
+            "type": "string"
+          }
+        }
+      },
+      "EmpleadoInput": {
+        "type": "object",
+        "properties": {
+          "id_empleado": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "num_telefonico": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "ocupacion": {
+            "type": "string"
+          }
+        }
+      },
+      "MetodoPagoInput": {
+        "type": "object",
+        "properties": {
+          "id_metodo_pago ": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          }
+        }
+      },
+      "ServicioInput": {
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoServicioInput": {
+        "type": "object",
+        "properties": {
+          "id_servicio ": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "duracion_minutos": {
+            "type": "string"
+          },
+          "tecnica": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "string"
+          },
+          "id_tipo_servicio ": {
+            "type": "string"
+          }
+        }
+      },
+      "ServicioPorCitaInput": {
+        "type": "object",
+        "properties": {
+          "id ": {
+            "type": "string"
+          },
+          "id_cita ": {
+            "type": "string"
+          },
+          "id_servicio ": {
+            "type": "string"
+          }
+        }
+      },
+      "DisponibilidadEmpleadoInput": {
+        "type": "object",
+        "properties": {
+          "id ": {
+            "type": "string"
+          },
+          "id_empleado ": {
+            "type": "string"
+          },
+          "dia_semana": {
+            "type": "string"
+          },
+          "mes": {
+            "type": "string"
+          },
+          "hora_inicio": {
+            "type": "string"
+          },
+          "hora_final": {
+            "type": "string"
+          }
+
+        }
+      },
+      "FacturaInput": {
+        "type": "object",
+        "properties": {
+          "id_factura ": {
+            "type": "string"
+          },
+          "id_cita ": {
+            "type": "string"
+          },
+          "id_metodo_pago": {
+            "type": "string"
+          }
+          
         }
       }
     }
@@ -73,7 +242,6 @@
           }
         }
       },
-
       "/api/clientes": {
         "get": {
           "summary": "Obtener la lista de clientes",
