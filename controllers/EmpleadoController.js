@@ -4,7 +4,7 @@ import Empleado from '../models/Empleado.js';
 export const guardarEmpleado = async (req, res) => {
   try {
     const {id_empleado, nombre, apellido, num_telefonico,email,ocupacion} = req.body;
-    const Empleado = await Empleado.create({ id_empleado, nombre, apellido, num_telefonico,email,ocupacion });
+    const empleado = await Empleado.create({ id_empleado, nombre, apellido, num_telefonico,email,ocupacion,image });
     res.json({ message: 'empleado programado correctamente' ,id_empleado});
   } catch (error) {
     console.error('Error al programar el empleado:', error);
@@ -13,7 +13,7 @@ export const guardarEmpleado = async (req, res) => {
 };
 export const listarEmpleado = async (req, res) => {
   try {
-    const empleado = await empleado.findAll();
+    const empleado = await Empleado.findAll();
     res.json(empleado);
   } catch (error) {
     console.error(error);
@@ -24,7 +24,7 @@ export const listarEmpleado = async (req, res) => {
 export const eliminarEmpleado = async (req, res) => {
   try {
     const empleadoId = req.params.id;
-    const empleado = await empleado.findByPk(empleadoId);
+    const empleado = await Empleado.findByPk(empleadoId);
     if (!empleadoId) {
       console.log('No se encontró el empleado');
       return res.status(404).json({ mensaje: 'No se encontró el empleado' });
@@ -39,7 +39,7 @@ export const eliminarEmpleado = async (req, res) => {
 };
 
 export const actualizarEmpleado = async (req, res) => {
-  const empleado = req.params.id;
+  const empleadoId = req.params.id;
   const nuevosDatos = req.body;
 
   try {
@@ -57,7 +57,7 @@ export const actualizarEmpleado = async (req, res) => {
 export const obtenerEmpleado = async (req, res) => {
   try {
     if(req.isAuthenticated()){
-      const obtenerEmpleado = await obtenerEmpleads.findAll();
+      const obtenerEmpleado = await ObtenerEmpleado.findAll();
       res.json(obtenerEmpleado);
     }else{
       res.redirect('/login');

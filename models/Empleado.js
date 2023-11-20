@@ -5,7 +5,8 @@ import sequelize from '../config/db.js';
 const Empleado = sequelize.define('empleado', {
   id_empleado: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   nombre: {
     type: DataTypes.STRING,
@@ -24,6 +25,10 @@ const Empleado = sequelize.define('empleado', {
     allowNull: true
   },
   ocupacion: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  image: {
     type: DataTypes.STRING,
     allowNull: true
   }

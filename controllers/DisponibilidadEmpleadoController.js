@@ -4,7 +4,7 @@ import DisponibilidadEmpleado from '../models/DisponibilidadEmpleado.js';
 export const guardarDisponibilidadEmpleado = async (req, res) => {
   try {
     const { id, id_empleado, dia_semana, mes, hora_inicio,hora_final} = req.body;
-    const DisponibilidadEmpleado = await DisponibilidadEmpleado.create({ id, id_empleado, dia_semana, mes, hora_inicio,hora_final });
+    const disponibilidadEmpleado = await DisponibilidadEmpleado.create({ id, id_empleado, dia_semana, mes, hora_inicio,hora_final });
     res.json({ message: 'disponibilidad empleado programada correctamente',  id, id_empleado});
   } catch (error) {
     console.error('Error al programar la disponibilidad empleado:', error);
@@ -24,12 +24,12 @@ export const listarDisponibilidadEmpleado= async (req, res) => {
 export const eliminarDisponibilidadEmpleado = async (req, res) => {
   try {
     const disponibilidadempleadoId = req.params.id;
-    const disponibilidadempleado = await DisponibilidadEmpleado.findByPk(citaId);
-    if (!disponibilidadempleadoIdId) {
+    const disponibilidadempleado = await DisponibilidadEmpleado.findByPk(disponibilidadempleadoId);
+    if (!disponibilidadempleadoId) {
       console.log('No se encontró la disponibilidad de empleado ');
       return res.status(404).json({ mensaje: 'No se encontró la disponibilidad de empleado ' });
     }
-    await disponibilidadempleado .destroy();
+    await disponibilidadempleado.destroy();
     console.log('disponibilidad de empleado eliminado con éxito');
     return res.json(true);
   } catch (error) {
@@ -57,7 +57,7 @@ export const actualizarDisponibilidadEmpleado = async (req, res) => {
 
 export const obtenerDisponibilidadEmpleado = async (req, res) => {
   try {
-    const disponibilidadempleado = await disponibilidadempleado.findAll();
+    const disponibilidadempleado = await DisponibilidadEmpleado.findAll();
     res.json(disponibilidadempleado);
   } catch (error) {
     console.error(error);
